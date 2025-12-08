@@ -1,7 +1,7 @@
 from Dao.AdminDaoImple import AdminDaoImplementation
 
 from lib.AdminManagementLib import AdminManagementLib
-# from lib.ReceptionManagementLib import ReceptionManagementLib
+from lib.ReceptionManagementLib import ReceptionManagementLib
 from lib.DoctorManagementLib import DoctorManagementLib
 # from lib.LabManagementLib import LabManagementLib
 
@@ -72,56 +72,56 @@ def admin_menu():
         elif c == "11": 
             break
 
-# # ---------------------------------------------------------
-# # RECEPTION MENU
-# # ---------------------------------------------------------
-# def reception_menu():
-#     while True:
-#         print("\n========== RECEPTION MENU ==========")
-#         print("""
-#         ------ PATIENT MANAGEMENT ------
-#         1. Register Patient
-#         2. Search Patient By ID
-#         3. Search Patient By Phone
-#         4. List Patients
+# ---------------------------------------------------------
+# RECEPTION MENU
+# ---------------------------------------------------------
+def reception_menu():
+    while True:
+        print("\n========== RECEPTION MENU ==========")
+        print("""
+        ------ PATIENT MANAGEMENT ------
+        1. Register Patient
+        2. Search Patient By ID
+        3. Search Patient By Phone
+        4. List Patients
 
-#         ------ APPOINTMENT MANAGEMENT ------
-#         5. Create Appointment
-#         6. List Today's Appointments
-#         7. Cancel Appointment
+        ------ APPOINTMENT MANAGEMENT ------
+        5. Create Appointment
+        6. List Today's Appointments
+        7. Cancel Appointment
 
-#         ------ BILLING ------
-#         8. Generate Consultation Bill
-#         9. List Consultation Bills
+        ------ BILLING ------
+        8. Generate Consultation Bill
+        9. List Consultation Bills
 
-#         10. Logout
-#         """)
+        10. Logout
+        """)
 
-#         valid = ["1","2","3","4","5","6","7","8","9","10"]
+        valid = ["1","2","3","4","5","6","7","8","9","10"]
 
-#         while True:
-#             c = input("Enter choice: ")
-#             if c in valid:
-#                 break
-#             print("Invalid choice, please enter again.")
+        while True:
+            c = input("Enter choice: ")
+            if c in valid:
+                break
+            print("Invalid choice, please enter again.")
 
-#         # PATIENT
-#         if c == "1": ReceptionManagementLib.add_patient()
-#         elif c == "2": ReceptionManagementLib.search_patient()
-#         elif c == "3": ReceptionManagementLib.search_patient_by_phone()
-#         elif c == "4": ReceptionManagementLib.list_patients()
+        # PATIENT
+        if c == "1": ReceptionManagementLib.add_patient()
+        elif c == "2": ReceptionManagementLib.search_patient()
+        elif c == "3": ReceptionManagementLib.search_patient_by_phone()
+        elif c == "4": ReceptionManagementLib.list_patients()
 
-#         # APPOINTMENT
-#         elif c == "5": ReceptionManagementLib.create_appointment()
-#         elif c == "6": ReceptionManagementLib.list_todays_appointments()
-#         elif c == "7": ReceptionManagementLib.cancel_appointment()
+        # APPOINTMENT
+        elif c == "5": ReceptionManagementLib.create_appointment()
+        elif c == "6": ReceptionManagementLib.list_todays_appointments()
+        elif c == "7": ReceptionManagementLib.cancel_appointment()
 
-#         # BILLING
-#         elif c == "8": ReceptionManagementLib.generate_consultation_bill()
-#         elif c == "9": ReceptionManagementLib.list_consultation_bills()
+        # BILLING
+        elif c == "8": ReceptionManagementLib.generate_consultation_bill()
+        elif c == "9": ReceptionManagementLib.list_consultation_bills()
 
-#         elif c == "10":
-#             break
+        elif c == "10":
+            break
 
 # # ---------------------------------------------------------
 # # DOCTOR MENU
