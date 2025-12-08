@@ -139,20 +139,20 @@ def doctor_menu(doctor_id: str):
         6. Logout
         """)
 
-#         valid = ["1","2","3","4","5","6"]
+        valid = ["1","2","3","4","5","6"]
 
-#         while True:
-#             c = input("Enter choice: ")
-#             if c in valid:
-#                 break
-#             print("Invalid choice, enter again.")
+        while True:
+            c = input("Enter choice: ")
+            if c in valid:
+                break
+            print("Invalid choice, enter again.")
 
-#         if c == "1": DoctorManagementLib.view_todays_appointments(doctor_id)
-#         elif c == "2": DoctorManagementLib.access_patient_records(doctor_id)
-#         elif c == "3": DoctorManagementLib.add_diagnosis_and_prescription(doctor_id)
-#         elif c == "4": DoctorManagementLib.update_appointment_status(doctor_id)
-#         elif c == "5": DoctorManagementLib.request_lab_tests(doctor_id)
-#         elif c == "6": break
+        if c == "1": DoctorManagementLib.view_todays_appointments(doctor_id)
+        elif c == "2": DoctorManagementLib.access_patient_records(doctor_id)
+        elif c == "3": DoctorManagementLib.add_diagnosis_and_prescription(doctor_id)
+        elif c == "4": DoctorManagementLib.update_appointment_status(doctor_id)
+        elif c == "5": DoctorManagementLib.request_lab_tests(doctor_id)
+        elif c == "6": break
 
 
 # # ---------------------------------------------------------
