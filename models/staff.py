@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 
 class Staff:
-    def _init_(
+    def __init__(
         self,
         staff_id: str = None,
         name: str = None,
@@ -65,5 +65,5 @@ class Staff:
     def set_salary(self, v): self.__salary=v
     def set_status(self, v): self.__status=v
 
-    def _str_(self):
-        return f"{self._staff_id} | {self.name} | {self.role} | {self._status}"
+    def __str__(self):
+        return f"{self.__staff_id} | {self.__name} | {self.__role} | {self.__status}"

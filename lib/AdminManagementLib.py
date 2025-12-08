@@ -1,9 +1,9 @@
-# from Dao.AdminDaoImple import AdminDaoImplementation
+from Dao.AdminDaoImple import AdminDaoImplementation
 from models.staff import Staff
 from models.doctor import Doctor
 
 from validation.staff_validation import validate_staff_inputs
-# from validation.common_validation import validate_positive_number
+from validation.common_validation import validate_positive_number
 
 
 class AdminManagementLib:

@@ -1,31 +1,57 @@
 from abc import ABC, abstractmethod
-from typing import List
-from models.appointment import Appointment
-from models.prescription import Prescription
-from models.lab_test_order import LabTestOrder
+from typing import List, Optional
+from models.staff import Staff
+from models.doctor import Doctor
 
 
-class DoctorDaoService(ABC):
+class AdminDaoService(ABC):
 
+    # ---- Login ----
     @abstractmethod
-    def list_today_appointments(self, doctor_id: str) -> List[Appointment]:
+    def authenticate_staff(self, username: str, password: str) -> Optional[Staff]:
+        """Return staff object if valid, otherwise None"""
+        pass
+
+    # ---- Staff ----
+    @abstractmethod
+    def add_staff(self, staff: Staff) -> str:
+        """Insert staff and return generated staff_id (STxxx)"""
         pass
 
     @abstractmethod
-    def save_prescription(self, prescription: Prescription) -> str:
-        """Return prescription_id (PRxxx)"""
+    def search_staff_by_id(self, staff_id: str) -> Optional[Staff]:
         pass
 
     @abstractmethod
-    def update_appointment_status(self, appointment_id: str, status: str) -> bool:
+    def search_staff_by_phone(self, phone: str) -> Optional[Staff]:
         pass
 
     @abstractmethod
-    def request_lab_test(self, order: LabTestOrder) -> str:
-        """Return lab_test_id (LTxxx)"""
+    def list_all_staff(self) -> List[Staff]:
         pass
 
     @abstractmethod
-    def view_patient_history(self, patient_id: str) -> List[Prescription]:
-        """Return all prescriptions for a patient sorted by date"""
+    def update_staff(self, staff: Staff) -> bool:
+        pass
+
+    @abstractmethod
+    def deactivate_staff(self, staff_id: str) -> bool:
+        pass
+
+    # ---- Doctor profile ----
+    @abstractmethod
+    def add_doctor_profile(self, doctor: Doctor) -> str:
+        """Return doctor_id (DRxxx)"""
+        pass
+
+    @abstractmethod
+    def update_doctor_profile(self, doctor: Doctor) -> bool:
+        pass
+
+    @abstractmethod
+    def list_all_doctors(self) -> List[Doctor]:
+        pass
+
+    @abstractmethod
+    def find_doctor_by_id(self, doctor_id: str) -> Optional[Doctor]:
         pass

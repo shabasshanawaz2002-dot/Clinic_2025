@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 
 class Appointment:
-    def _init_(
+    def __init__(
         self,
         appointment_id: str = None,
         patient_id: str = None,
@@ -37,11 +37,11 @@ class Appointment:
     def set_token_no(self, v): self.__token_no=v
     def set_status(self, v): self.__status=v
 
-    def _str_(self):
+    def __str__(self):
         return (
-            f"{self._appointment_id} | P:{self.patient_id} | D:{self._doctor_id} | "
-            f"{self._appointment_date} {self._appointment_time} | "
-            f"T:{self._token_no} | {self._status}"
+            f"{self.__appointment_id} | P:{self.__patient_id} | D:{self.__doctor_id} | "
+            f"{self.__appointment_date} {self.__appointment_time} | "
+            f"T:{self.__token_no} | {self.__status}"
         )
     
 

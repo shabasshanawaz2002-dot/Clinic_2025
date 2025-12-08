@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 
 class Patient:
-    def _init_(
+    def __init__(
         self,
         patient_id: str = None,
         name: str = None,
@@ -41,5 +41,5 @@ class Patient:
     def set_address(self, v): self.__address=v
     def set_emergency_contact(self, v): self.__emergency_contact=v
 
-    def _str_(self):
-        return f"{self._patient_id} | {self.name} | {self._phone}"
+    def __str__(self):
+        return f"{self.__patient_id} | {self.__name} | {self.__phone}"
