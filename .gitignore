@@ -1,0 +1,6 @@
+myvenv/
+__pycache__/
+*.pyc
+connection/
+DbConnection/
+db_config.ini
