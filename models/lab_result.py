@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 
 class LabResult:
-    def _init_(
+    def __init__(
         self,
         lab_result_id: str = None,
         lab_test_id: str = None,
@@ -31,5 +31,5 @@ class LabResult:
     def get_result_date(self): return self.__result_date
     def set_result_date(self, v): self.__result_date=v
 
-    def _str_(self):
-        return f"{self._lab_result_id} | Test:{self.lab_test_id} | {self._result_date}"
+    def __str__(self):
+        return f"{self.__lab_result_id} | Test:{self.__lab_test_id} | {self.__result_date}"
