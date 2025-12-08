@@ -30,11 +30,6 @@ class ReceptionDaoService(ABC):
         """Return appointment_id (Axxx)"""
         pass
 
-    # @abstractmethod
-    # def generate_next_token(self, doctor_id: str, appointment_date: str) -> str:
-    #     """Return next token number for doctor"""
-    #     pass
-
     @abstractmethod
     def list_today_appointments(self) -> List[Appointment]:
         pass
