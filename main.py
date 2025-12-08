@@ -206,8 +206,8 @@ def main():
             admin_menu()
 
         # RECEPTION
-        # elif role == "receptionist":
-        #     reception_menu()
+        elif role == "receptionist":
+            reception_menu()
 
         # DOCTOR
         elif role == "doctor":
@@ -223,7 +223,7 @@ def main():
                 print("Doctor profile not found. Contact admin.")
                 continue
 
-        #     doctor_menu(doctor_id)
+            doctor_menu(doctor_id)
 
         # # LAB TECH
         # elif role == "lab technician":
