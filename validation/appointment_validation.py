@@ -1,9 +1,6 @@
 from datetime import datetime, date, time
 
-
-# ------------------------------------------------------------
 # Validate appointment date + time (base format checking)
-# ------------------------------------------------------------
 def validate_appointment_inputs(date_input: str, time_input: str):
     """
     Convert string date and string time into datetime.date and datetime.time
@@ -29,10 +26,7 @@ def validate_appointment_inputs(date_input: str, time_input: str):
     }
 
 
-
-# ------------------------------------------------------------
 # Validate doctor working hours + enforce today and future time
-# ------------------------------------------------------------
 def validate_doctor_time(working_hours: str, input_time: str):
     """
     Checks if given appointment time lies within doctor's working hours
