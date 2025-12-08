@@ -13,9 +13,7 @@ class ReceptionManagementLib:
 
     dao = ReceptionDaoImplementation()
 
-    # -----------------------------------------------
     # PATIENT MANAGEMENT
-    # -----------------------------------------------
     @staticmethod
     def add_patient():
         while True:
@@ -84,10 +82,7 @@ class ReceptionManagementLib:
         for p in pts:
             print(p)
 
-
-    # -----------------------------------------------
     # APPOINTMENT management
-    # -----------------------------------------------
     @staticmethod
     def create_appointment():
         while True:
@@ -95,8 +90,6 @@ class ReceptionManagementLib:
                 print("\n--- CREATE APPOINTMENT ---")
                 patient_id = input("Enter patient ID: ")
                 doctor_id = input("Enter doctor ID: ")
-
-                # today ONLY
                 today = datetime.today().date()
 
                 # get doctor details to check working hours
@@ -105,16 +98,11 @@ class ReceptionManagementLib:
                     print("Doctor not found.")
                     return
 
-                working_hours = doctor["working_hours"]    # example "10AM-4PM"
-
-                # time input
+                working_hours = doctor["working_hours"]   
                 time_input = input("Enter appointment time (HH:MM): ")
 
                 # validate doctor time
-                # returns datetime.time object
                 valid_time = validate_doctor_time(working_hours, time_input)
-
-                # construct appointment object
                 appointment = Appointment(
                     patient_id=patient_id,
                     doctor_id=doctor_id,
@@ -130,7 +118,6 @@ class ReceptionManagementLib:
                     print("Token No for this appointment:", appointment.get_token_no())
                 else:
                     print("Something went wrong while creating appointment.")
-
                 break
 
             except Exception as e:
@@ -156,16 +143,12 @@ class ReceptionManagementLib:
         else:
             print("Operation failed.")
 
-
-    # -----------------------------------------------
     # BILLING
-    # -----------------------------------------------
     @staticmethod
     def generate_consultation_bill():
         print("\n--- CONSULTATION BILL ---")
         appt_id = input("Enter appointment ID: ")
 
-        # NEW: fetch appointment
         appt = ReceptionManagementLib.dao.get_appointment_by_id(appt_id)
         if not appt:
             print("Invalid appointment ID")
@@ -174,7 +157,6 @@ class ReceptionManagementLib:
         patient_id = appt["patient_id"]
         doctor_id = appt["doctor_id"]
 
-        # amount must come from doctor table
         doc = ReceptionManagementLib.dao.get_doctor_by_id(doctor_id)
         if not doc:
             print("Doctor not found")
