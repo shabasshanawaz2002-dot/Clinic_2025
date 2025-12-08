@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 
 class Bill:
-    def _init_(
+    def __init__(
         self,
         bill_id: str = None,
         appointment_id: str = None,
@@ -41,8 +41,8 @@ class Bill:
     def get_generated_date(self): return self.__generated_date
     def set_generated_date(self, v): self.__generated_date=v
 
-    def _str_(self):
+    def __str__(self):
         return (
-            f"{self._bill_id} | A:{self.appointment_id} | P:{self._patient_id} | "
-            f"D:{self._doctor_id} | {self.amount} | {self._status}"
+            f"{self.__bill_id} | A:{self.__appointment_id} | P:{self.__patient_id} | "
+            f"D:{self.__doctor_id} | {self.__amount} | {self.__status}"
         )
