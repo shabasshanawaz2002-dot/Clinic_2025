@@ -81,7 +81,7 @@ WHERE doctor_id=%s AND appointment_date=%s AND appointment_time=%s
 
 class ReceptionDaoImplementation(ReceptionDaoService):
 
-    def _init_(self):
+    def __init__(self):
         self.conn = ConnectionDB().get_connection()
 
 
