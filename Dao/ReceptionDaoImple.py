@@ -10,9 +10,6 @@ from models.bill import Bill
 
 from pymysql.cursors import DictCursor
 
-
-# ================= SQL =====================
-
 INSERT_PATIENT = """
 INSERT INTO patient(name, age, blood_group, gender, phone, address, emergency_contact)
 VALUES (%s, %s, %s, %s, %s, %s, %s)
@@ -82,18 +79,13 @@ WHERE doctor_id=%s AND appointment_date=%s AND appointment_time=%s
 """
 
 
-
-# ================= IMPLEMENTATION =======================
-
 class ReceptionDaoImplementation(ReceptionDaoService):
 
     def _init_(self):
         self.conn = ConnectionDB().get_connection()
 
 
-    # ----------------------------------------------------
-    # Add patient  (TRIGGER BASED RETURN FIX)
-    # ----------------------------------------------------
+    # Add patient  
     def add_patient(self, patient: Patient):
         cursor = None
         try:
@@ -135,9 +127,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             return None
 
 
-    # ----------------------------------------------------
     # Search by ID
-    # ----------------------------------------------------
     def search_patient_by_id(self, patient_id: str):
         cursor = None
         try:
@@ -164,10 +154,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
     # Search by phone
-    # ----------------------------------------------------
     def search_patient_by_phone(self, phone: str):
         cursor = None
         try:
@@ -194,10 +181,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
     # List all patients
-    # ----------------------------------------------------
     def list_all_patients(self)-> List[Patient]:
         cursor = None
         pts = []
@@ -225,10 +209,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
     # Get doctor
-    # ----------------------------------------------------
     def get_doctor_by_id(self, doctor_id: str):
         cursor = None
         try:
@@ -241,10 +222,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
-    # Create Appointment  (TRIGGER RETURN + TOKEN FIXED)
-    # ----------------------------------------------------
+    # Create Appointment  
     def create_appointment(self, appointment: Appointment):
         cursor = None
         try:
@@ -253,9 +231,6 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             appt_date = appointment.get_appointment_date()
             appt_time = appointment.get_appointment_time()
 
-            # ---------------------------------------------------
-            # NEW LOGIC (DON’T ALLOW SAME TIME FOR SAME DOCTOR)
-            # ---------------------------------------------------
             cursor.execute(
                 CHECK_TIME_EXISTS,
                 (
@@ -268,11 +243,8 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if existing:
                 print("Time slot already booked for this doctor. Choose a different time.")
                 return None
-            # ---------------------------------------------------
 
-            # ---------------------------------------------------
-            # TOKEN LOGIC (RESET PER DAY, PER DOCTOR)
-            # ---------------------------------------------------
+            # TOKEN LOGIC 
             date_str = appt_date.strftime("%Y-%m-%d")
 
             cursor.execute(GET_MAX_TOKEN, (appointment.get_doctor_id(), date_str))
@@ -281,7 +253,6 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             next_token = int(row["max_token"]) + 1 if (row and row["max_token"]) else 1
 
             appointment.set_token_no(str(next_token))
-            # ---------------------------------------------------
 
             cursor.execute(
                 INSERT_APPOINTMENT,
@@ -324,9 +295,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
         except:
             return None
 
-    # ----------------------------------------------------
     # List today's appointments
-    # ----------------------------------------------------
     def list_today_appointments(self)-> List[Appointment]:
         cursor = None
         appts = []
@@ -356,10 +325,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
     # Cancel appointment
-    # ----------------------------------------------------
     def cancel_appointment(self, appointment_id: str)-> bool:
         cursor = None
         try:
@@ -374,10 +340,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-
-    # ----------------------------------------------------
-    # Generate Consultation Bill  (TRIGGER RETURN)
-    # ----------------------------------------------------
+    # Generate Consultation Bill 
     def generate_consultation_bill(self, bill: Bill):
         cursor = None
         try:
@@ -401,7 +364,6 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-        # return trigger-generated bill_id
         try:
             cursor2 = self.conn.cursor(DictCursor)
             cursor2.execute(
@@ -417,10 +379,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
         except:
             return None
 
-
-    # ----------------------------------------------------
     # List bills
-    # ----------------------------------------------------
     def list_consultation_bills(self)-> List[Bill]:
         cursor = None
         bills = []
@@ -448,9 +407,7 @@ class ReceptionDaoImplementation(ReceptionDaoService):
             if cursor:
                 cursor.close()
 
-# ----------------------------------------------------
     # Get appointment by ID
-    # ----------------------------------------------------
     def get_appointment_by_id(self, appointment_id: str):
         cursor = None
         try:
