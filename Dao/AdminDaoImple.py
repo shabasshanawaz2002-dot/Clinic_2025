@@ -9,7 +9,7 @@ from models.doctor import Doctor
 
 class AdminDaoImplementation(AdminDaoService):
 
-    def _init_(self):
+    def __init__(self):
         self.conn = ConnectionDB().get_connection()
 
 
