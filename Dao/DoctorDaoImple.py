@@ -14,10 +14,7 @@ class DoctorDaoImplementation(DoctorDaoService):
     def __init__(self):
         self.conn = ConnectionDB().get_connection()
 
-    # -------------------------------------------------------
     # GET TODAY APPOINTMENTS OF A DOCTOR
-    # -------------------------------------------------------
-
     def list_today_appointments(self, doctor_id: str) -> List[Appointment]:
         result = []
         cursor = None
@@ -39,13 +36,12 @@ class DoctorDaoImplementation(DoctorDaoService):
                     appointment_id=row["appointment_id"],
                     patient_id=row["patient_id"],
                     doctor_id=row["doctor_id"],
-                    appointment_date=row["appointment_date"],    # DATE
-                    appointment_time=row["appointment_time"],    # TIME
+                    appointment_date=row["appointment_date"],   
+                    appointment_time=row["appointment_time"],    
                     token_no=row["token_no"],
                     status=row["status"],
                 )
                 
-                # NEW: add patient name dynamically
                 appt.patient_name = row["patient_name"]
 
                 result.append(appt)
@@ -57,10 +53,7 @@ class DoctorDaoImplementation(DoctorDaoService):
 
         return result
 
-
-    # -------------------------------------------------------
     # SAVE PRESCRIPTION
-    # -------------------------------------------------------
     def save_prescription(self, prescription: Prescription) -> str:
         cursor = None
         try:
@@ -111,9 +104,7 @@ class DoctorDaoImplementation(DoctorDaoService):
 
         return ""
 
-    # -------------------------------------------------------
     # UPDATE APPOINTMENT STATUS
-    # -------------------------------------------------------
     def update_appointment_status(self, appointment_id: str, status: str) -> bool:
         cursor = None
         try:
@@ -131,9 +122,7 @@ class DoctorDaoImplementation(DoctorDaoService):
             if cursor: cursor.close()
         return False
 
-    # -------------------------------------------------------
     # REQUEST LAB TEST
-    # -------------------------------------------------------
     def request_lab_test(self, order: LabTestOrder) -> str:
         cursor = None
         try:
@@ -178,9 +167,7 @@ class DoctorDaoImplementation(DoctorDaoService):
             if cursor: cursor.close()
         return ""
 
-    # -------------------------------------------------------
     # VIEW PATIENT HISTORY (ALL PRESCRIPTIONS)
-    # -------------------------------------------------------
     def view_patient_history(self, patient_id: str) -> List[Prescription]:
         result = []
         cursor = None
@@ -208,7 +195,7 @@ class DoctorDaoImplementation(DoctorDaoService):
                         dosage=row["dosage"],
                         duration=row["duration"],
                         notes=row["notes"],
-                        created_at=row["created_at"],       # DATETIME returned by MySQL
+                        created_at=row["created_at"], 
                     )
                 )
         except Exception as e:
