@@ -10,9 +10,7 @@ class AdminManagementLib:
 
     dao = AdminDaoImplementation()
 
-    # --------------------------------------------------------
     # ADD STAFF
-    # --------------------------------------------------------
     @staticmethod
     def add_staff():
         while True:
@@ -62,9 +60,7 @@ class AdminManagementLib:
                 print("Error:", e)
                 print("Please re-enter details.\n")
 
-    # --------------------------------------------------------
     # SEARCH STAFF
-    # --------------------------------------------------------
     @staticmethod
     def search_staff():
         print("\n--- SEARCH STAFF ---")
@@ -85,9 +81,7 @@ class AdminManagementLib:
         else:
             print("Staff not found")
 
-    # --------------------------------------------------------
     # LIST ALL STAFF
-    # --------------------------------------------------------
     @staticmethod
     def list_staff():
         print("\n--- STAFF LIST ---")
@@ -98,9 +92,7 @@ class AdminManagementLib:
         for s in staff_list:
             print(s)
 
-    # --------------------------------------------------------
     # UPDATE STAFF
-    # --------------------------------------------------------
     @staticmethod
     def update_staff():
         print("\n--- UPDATE STAFF ---")
@@ -134,9 +126,8 @@ class AdminManagementLib:
         else:
             print("Update failed.")
 
-    # --------------------------------------------------------
+
     # DEACTIVATE STAFF
-    # --------------------------------------------------------
     @staticmethod
     def deactivate_staff():
         print("\n--- DEACTIVATE STAFF ---")
@@ -146,9 +137,7 @@ class AdminManagementLib:
         else:
             print("Operation failed. Check staff ID.")
 
-    # --------------------------------------------------------
     # ADD DOCTOR PROFILE (with role check)
-    # --------------------------------------------------------
     @staticmethod
     def add_doctor():
         print("\n--- ADD DOCTOR PROFILE ---")
@@ -199,9 +188,7 @@ class AdminManagementLib:
         else:
             print("Something went wrong while adding doctor profile.")
 
-    # --------------------------------------------------------
     # UPDATE DOCTOR PROFILE
-    # --------------------------------------------------------
     @staticmethod
     def update_doctor():
         print("\n--- UPDATE DOCTOR PROFILE ---")
@@ -233,9 +220,7 @@ class AdminManagementLib:
         else:
             print("Update failed.")
 
-    # --------------------------------------------------------
     # LIST DOCTORS
-    # --------------------------------------------------------
     @staticmethod
     def list_doctors():
         print("\n--- DOCTOR LIST ---")
