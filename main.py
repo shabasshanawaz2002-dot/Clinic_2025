@@ -1,9 +1,9 @@
 from Dao.AdminDaoImple import AdminDaoImplementation
 
 from lib.AdminManagementLib import AdminManagementLib
-from lib.ReceptionManagementLib import ReceptionManagementLib
+# from lib.ReceptionManagementLib import ReceptionManagementLib
 from lib.DoctorManagementLib import DoctorManagementLib
-from lib.LabManagementLib import LabManagementLib
+# from lib.LabManagementLib import LabManagementLib
 
 
 # DAO used for Login
@@ -72,120 +72,120 @@ def admin_menu():
         elif c == "11": 
             break
 
-# ---------------------------------------------------------
-# RECEPTION MENU
-# ---------------------------------------------------------
-def reception_menu():
-    while True:
-        print("\n========== RECEPTION MENU ==========")
-        print("""
-        ------ PATIENT MANAGEMENT ------
-        1. Register Patient
-        2. Search Patient By ID
-        3. Search Patient By Phone
-        4. List Patients
+# # ---------------------------------------------------------
+# # RECEPTION MENU
+# # ---------------------------------------------------------
+# def reception_menu():
+#     while True:
+#         print("\n========== RECEPTION MENU ==========")
+#         print("""
+#         ------ PATIENT MANAGEMENT ------
+#         1. Register Patient
+#         2. Search Patient By ID
+#         3. Search Patient By Phone
+#         4. List Patients
 
-        ------ APPOINTMENT MANAGEMENT ------
-        5. Create Appointment
-        6. List Today's Appointments
-        7. Cancel Appointment
+#         ------ APPOINTMENT MANAGEMENT ------
+#         5. Create Appointment
+#         6. List Today's Appointments
+#         7. Cancel Appointment
 
-        ------ BILLING ------
-        8. Generate Consultation Bill
-        9. List Consultation Bills
+#         ------ BILLING ------
+#         8. Generate Consultation Bill
+#         9. List Consultation Bills
 
-        10. Logout
-        """)
+#         10. Logout
+#         """)
 
-        valid = ["1","2","3","4","5","6","7","8","9","10"]
+#         valid = ["1","2","3","4","5","6","7","8","9","10"]
 
-        while True:
-            c = input("Enter choice: ")
-            if c in valid:
-                break
-            print("Invalid choice, please enter again.")
+#         while True:
+#             c = input("Enter choice: ")
+#             if c in valid:
+#                 break
+#             print("Invalid choice, please enter again.")
 
-        # PATIENT
-        if c == "1": ReceptionManagementLib.add_patient()
-        elif c == "2": ReceptionManagementLib.search_patient()
-        elif c == "3": ReceptionManagementLib.search_patient_by_phone()
-        elif c == "4": ReceptionManagementLib.list_patients()
+#         # PATIENT
+#         if c == "1": ReceptionManagementLib.add_patient()
+#         elif c == "2": ReceptionManagementLib.search_patient()
+#         elif c == "3": ReceptionManagementLib.search_patient_by_phone()
+#         elif c == "4": ReceptionManagementLib.list_patients()
 
-        # APPOINTMENT
-        elif c == "5": ReceptionManagementLib.create_appointment()
-        elif c == "6": ReceptionManagementLib.list_todays_appointments()
-        elif c == "7": ReceptionManagementLib.cancel_appointment()
+#         # APPOINTMENT
+#         elif c == "5": ReceptionManagementLib.create_appointment()
+#         elif c == "6": ReceptionManagementLib.list_todays_appointments()
+#         elif c == "7": ReceptionManagementLib.cancel_appointment()
 
-        # BILLING
-        elif c == "8": ReceptionManagementLib.generate_consultation_bill()
-        elif c == "9": ReceptionManagementLib.list_consultation_bills()
+#         # BILLING
+#         elif c == "8": ReceptionManagementLib.generate_consultation_bill()
+#         elif c == "9": ReceptionManagementLib.list_consultation_bills()
 
-        elif c == "10":
-            break
+#         elif c == "10":
+#             break
 
-# ---------------------------------------------------------
-# DOCTOR MENU
-# ---------------------------------------------------------
-def doctor_menu(doctor_id: str):
-    while True:
-        print("\n========== DOCTOR MENU ==========")
-        print("""
-        1. View Today's Appointments
-        2. Access Patient Records
-        3. Add Diagnosis & Prescription
-        4. Update Appointment Status
-        5. Request Lab Tests
+# # ---------------------------------------------------------
+# # DOCTOR MENU
+# # ---------------------------------------------------------
+# def doctor_menu(doctor_id: str):
+#     while True:
+#         print("\n========== DOCTOR MENU ==========")
+#         print("""
+#         1. View Today's Appointments
+#         2. Access Patient Records
+#         3. Add Diagnosis & Prescription
+#         4. Update Appointment Status
+#         5. Request Lab Tests
 
-        6. Logout
-        """)
+#         6. Logout
+#         """)
 
-        valid = ["1","2","3","4","5","6"]
+#         valid = ["1","2","3","4","5","6"]
 
-        while True:
-            c = input("Enter choice: ")
-            if c in valid:
-                break
-            print("Invalid choice, enter again.")
+#         while True:
+#             c = input("Enter choice: ")
+#             if c in valid:
+#                 break
+#             print("Invalid choice, enter again.")
 
-        if c == "1": DoctorManagementLib.view_todays_appointments(doctor_id)
-        elif c == "2": DoctorManagementLib.access_patient_records(doctor_id)
-        elif c == "3": DoctorManagementLib.add_diagnosis_and_prescription(doctor_id)
-        elif c == "4": DoctorManagementLib.update_appointment_status(doctor_id)
-        elif c == "5": DoctorManagementLib.request_lab_tests(doctor_id)
-        elif c == "6": break
+#         if c == "1": DoctorManagementLib.view_todays_appointments(doctor_id)
+#         elif c == "2": DoctorManagementLib.access_patient_records(doctor_id)
+#         elif c == "3": DoctorManagementLib.add_diagnosis_and_prescription(doctor_id)
+#         elif c == "4": DoctorManagementLib.update_appointment_status(doctor_id)
+#         elif c == "5": DoctorManagementLib.request_lab_tests(doctor_id)
+#         elif c == "6": break
 
 
-# ---------------------------------------------------------
-# LAB TECH MENU
-# ---------------------------------------------------------
-def lab_menu():
-    while True:
-        print("\n========== LAB TECHNICIAN MENU ==========")
-        print("""
-        1. View Pending Lab Tests
-        2. Enter Lab Result
-        3. View Completed Tests
+# # ---------------------------------------------------------
+# # LAB TECH MENU
+# # ---------------------------------------------------------
+# def lab_menu():
+#     while True:
+#         print("\n========== LAB TECHNICIAN MENU ==========")
+#         print("""
+#         1. View Pending Lab Tests
+#         2. Enter Lab Result
+#         3. View Completed Tests
 
-        4. Generate Lab Bill
-        5. List Lab Bills
+#         4. Generate Lab Bill
+#         5. List Lab Bills
 
-        6. Logout
-        """)
+#         6. Logout
+#         """)
 
-        valid = ["1","2","3","4","5","6"]
+#         valid = ["1","2","3","4","5","6"]
 
-        while True:
-            c = input("Enter choice: ")
-            if c in valid:
-                break
-            print("Invalid choice, enter again.")
+#         while True:
+#             c = input("Enter choice: ")
+#             if c in valid:
+#                 break
+#             print("Invalid choice, enter again.")
 
-        if c == "1": LabManagementLib.view_pending_tests()
-        elif c == "2": LabManagementLib.enter_lab_result()
-        elif c == "3": LabManagementLib.view_completed_tests()
-        elif c == "4": LabManagementLib.generate_lab_bill()
-        elif c == "5": LabManagementLib.list_lab_bills()
-        elif c == "6": break
+#         if c == "1": LabManagementLib.view_pending_tests()
+#         elif c == "2": LabManagementLib.enter_lab_result()
+#         elif c == "3": LabManagementLib.view_completed_tests()
+#         elif c == "4": LabManagementLib.generate_lab_bill()
+#         elif c == "5": LabManagementLib.list_lab_bills()
+#         elif c == "6": break
 
 
 # ---------------------------------------------------------
@@ -206,8 +206,8 @@ def main():
             admin_menu()
 
         # RECEPTION
-        elif role == "receptionist":
-            reception_menu()
+        # elif role == "receptionist":
+        #     reception_menu()
 
         # DOCTOR
         elif role == "doctor":
@@ -223,11 +223,11 @@ def main():
                 print("Doctor profile not found. Contact admin.")
                 continue
 
-            doctor_menu(doctor_id)
+        #     doctor_menu(doctor_id)
 
-        # LAB TECH
-        elif role == "lab technician":
-            lab_menu()
+        # # LAB TECH
+        # elif role == "lab technician":
+        #     lab_menu()
 
         else:
             print("Unknown role. Contact admin.")
