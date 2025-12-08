@@ -126,18 +126,18 @@ def reception_menu():
 # # ---------------------------------------------------------
 # # DOCTOR MENU
 # # ---------------------------------------------------------
-# def doctor_menu(doctor_id: str):
-#     while True:
-#         print("\n========== DOCTOR MENU ==========")
-#         print("""
-#         1. View Today's Appointments
-#         2. Access Patient Records
-#         3. Add Diagnosis & Prescription
-#         4. Update Appointment Status
-#         5. Request Lab Tests
+def doctor_menu(doctor_id: str):
+    while True:
+        print("\n========== DOCTOR MENU ==========")
+        print("""
+        1. View Today's Appointments
+        2. Access Patient Records
+        3. Add Diagnosis & Prescription
+        4. Update Appointment Status
+        5. Request Lab Tests
 
-#         6. Logout
-#         """)
+        6. Logout
+        """)
 
 #         valid = ["1","2","3","4","5","6"]
 
