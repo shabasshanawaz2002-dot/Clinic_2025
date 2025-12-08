@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 connection/
 DbConnection/
-db_config.ini
+db_config.ini/
+.vscode
