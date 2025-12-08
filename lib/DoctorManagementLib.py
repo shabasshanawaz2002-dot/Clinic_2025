@@ -13,9 +13,7 @@ class DoctorManagementLib:
     doctor_dao = DoctorDaoImplementation()
     reception_dao = ReceptionDaoImplementation()
 
-    # --------------------------------------------------------
     # 1. VIEW TODAY'S APPOINTMENTS (for this doctor)
-    # --------------------------------------------------------
     @staticmethod
     def view_todays_appointments(doctor_id: str):
         print("\n--- TODAY'S APPOINTMENTS ---")
@@ -24,7 +22,6 @@ class DoctorManagementLib:
             print("No appointments for today.")
             return
 
-        # Format: Token | Appointment ID | Patient ID | Time | Status
         for a in appts:
             print(
                 f"TOKEN: {a.get_token_no()} | "
@@ -34,12 +31,6 @@ class DoctorManagementLib:
                 f"STATUS: {a.get_status()}"
             )
 
-    # --------------------------------------------------------
-    # 2. ACCESS PATIENT RECORDS
-    #    - Patient details
-    #    - Token, appointment info (today)
-    #    - Previous prescriptions history
-    # --------------------------------------------------------
     @staticmethod
     def access_patient_records(doctor_id: str):
         """
@@ -88,12 +79,6 @@ class DoctorManagementLib:
                 )
 
 
-    # --------------------------------------------------------
-    # 3. ADD DIAGNOSIS & PRESCRIPTION
-    #    - For a selected appointment (today)
-    #    - Save prescription
-    #    - Mark appointment Completed
-    # --------------------------------------------------------
     @staticmethod
     def add_diagnosis_and_prescription(doctor_id: str):
         """
@@ -183,13 +168,11 @@ class DoctorManagementLib:
                     dosage=data["dosage"],
                     duration=data["duration"],
                     notes=data["notes"],
-                    # created_at auto with datetime.now() in model
                 )
 
                 pid = DoctorManagementLib.doctor_dao.save_prescription(pres)
                 if pid:
                     print(f"\nPrescription Saved Successfully. ID: {pid}")
-                    # update appointment status => Completed
                     DoctorManagementLib.doctor_dao.update_appointment_status(
                         selected_appt.get_appointment_id(), "Completed"
                     )
@@ -201,9 +184,7 @@ class DoctorManagementLib:
                 print("Validation Error:", e)
                 print("Please re-enter prescription details.\n")
 
-    # --------------------------------------------------------
     # 4. UPDATE APPOINTMENT STATUS
-    # --------------------------------------------------------
     @staticmethod
     def update_appointment_status(doctor_id: str):
         """
@@ -234,9 +215,7 @@ class DoctorManagementLib:
         else:
             print("Failed to update appointment status (check Appointment ID).")
 
-    # --------------------------------------------------------
     # 5. REQUEST LAB TESTS
-    # --------------------------------------------------------
     @staticmethod
     def request_lab_tests(doctor_id: str):
         """
@@ -298,8 +277,6 @@ class DoctorManagementLib:
                 order_id = DoctorManagementLib.doctor_dao.request_lab_test(order)
                 if order_id:
                     print(f"Lab Test Order Created. ORDER ID: {order_id}")
-
-                    # NEW: summary
                     print("\n--- LAB TEST SUMMARY ---")
                     print(f"Test Name  : {val['test_name']}")
                     print(f"Notes      : {val['notes']}")
