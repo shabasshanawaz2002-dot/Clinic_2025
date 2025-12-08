@@ -3,7 +3,7 @@ from Dao.AdminDaoImple import AdminDaoImplementation
 from lib.AdminManagementLib import AdminManagementLib
 from lib.ReceptionManagementLib import ReceptionManagementLib
 from lib.DoctorManagementLib import DoctorManagementLib
-# from lib.LabManagementLib import LabManagementLib
+from lib.LabManagementLib import LabManagementLib
 
 
 # DAO used for Login
@@ -158,34 +158,34 @@ def doctor_menu(doctor_id: str):
 # # ---------------------------------------------------------
 # # LAB TECH MENU
 # # ---------------------------------------------------------
-# def lab_menu():
-#     while True:
-#         print("\n========== LAB TECHNICIAN MENU ==========")
-#         print("""
-#         1. View Pending Lab Tests
-#         2. Enter Lab Result
-#         3. View Completed Tests
+def lab_menu():
+    while True:
+        print("\n========== LAB TECHNICIAN MENU ==========")
+        print("""
+        1. View Pending Lab Tests
+        2. Enter Lab Result
+        3. View Completed Tests
 
-#         4. Generate Lab Bill
-#         5. List Lab Bills
+        4. Generate Lab Bill
+        5. List Lab Bills
 
-#         6. Logout
-#         """)
+        6. Logout
+        """)
 
-#         valid = ["1","2","3","4","5","6"]
+        valid = ["1","2","3","4","5","6"]
 
-#         while True:
-#             c = input("Enter choice: ")
-#             if c in valid:
-#                 break
-#             print("Invalid choice, enter again.")
+        while True:
+            c = input("Enter choice: ")
+            if c in valid:
+                break
+            print("Invalid choice, enter again.")
 
-#         if c == "1": LabManagementLib.view_pending_tests()
-#         elif c == "2": LabManagementLib.enter_lab_result()
-#         elif c == "3": LabManagementLib.view_completed_tests()
-#         elif c == "4": LabManagementLib.generate_lab_bill()
-#         elif c == "5": LabManagementLib.list_lab_bills()
-#         elif c == "6": break
+        if c == "1": LabManagementLib.view_pending_tests()
+        elif c == "2": LabManagementLib.enter_lab_result()
+        elif c == "3": LabManagementLib.view_completed_tests()
+        elif c == "4": LabManagementLib.generate_lab_bill()
+        elif c == "5": LabManagementLib.list_lab_bills()
+        elif c == "6": break
 
 
 # ---------------------------------------------------------
@@ -226,8 +226,8 @@ def main():
             doctor_menu(doctor_id)
 
         # # LAB TECH
-        # elif role == "lab technician":
-        #     lab_menu()
+        elif role == "lab technician":
+            lab_menu()
 
         else:
             print("Unknown role. Contact admin.")
