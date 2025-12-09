@@ -1,15 +1,17 @@
-from datetime import datetime, date, time
+from datetime import datetime
 
 class LabBill:
     def __init__(
         self,
         lab_bill_id: str = None,
+        lab_test_id: str = None,        
         patient_id: str = None,
         total_amount: float = None,
         status: str = "Pending",
         generated_date: datetime = None,
     ):
         self.__lab_bill_id = lab_bill_id
+        self.__lab_test_id = lab_test_id       
         self.__patient_id = patient_id
         self.__total_amount = total_amount
         self.__status = status
@@ -18,6 +20,9 @@ class LabBill:
     # getters/setters
     def get_lab_bill_id(self): return self.__lab_bill_id
     def set_lab_bill_id(self, v): self.__lab_bill_id=v
+
+    def get_lab_test_id(self): return self.__lab_test_id        
+    def set_lab_test_id(self, v): self.__lab_test_id=v
 
     def get_patient_id(self): return self.__patient_id
     def set_patient_id(self, v): self.__patient_id=v
@@ -33,6 +38,6 @@ class LabBill:
 
     def __str__(self):
         return (
-            f"{self.__lab_bill_id} | P:{self.__patient_id} | "
-            f"Total:{self.__total_amount} | {self.__status}"
+            f"{self.__lab_bill_id} | Test:{self.__lab_test_id} | "
+            f"P:{self.__patient_id} | Total:{self.__total_amount} | {self.__status}"
         )
