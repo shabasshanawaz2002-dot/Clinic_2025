@@ -93,10 +93,23 @@ class LabManagementLib:
         print("\n--- GENERATE LAB BILL ---")
         lab_test_id = input("Enter Lab Test ID: ")
 
-        # NEW VALIDATION
         lab_test = LabManagementLib.dao.get_lab_test_by_id(lab_test_id)
         if not lab_test:
             print("Invalid Lab Test ID. Cannot generate bill.")
+            return
+
+        if lab_test["status"] != "Completed":
+            print("\nBilling allowed only after test is Completed.")
+            print(f"Current status: {lab_test['status']}")
+            return
+
+        # NEW – check bill already exists for this test
+        existing = LabManagementLib.dao.get_bill_by_lab_test_id(lab_test_id)
+        if existing:
+            print("\nA bill already exists for this Lab Test.")
+            print(f"Bill ID: {existing['lab_bill_id']}")
+            print(f"Amount: {existing['total_amount']}")
+            print(f"Date  : {existing['generated_date']}")
             return
 
         patient_id = lab_test["patient_id"]
@@ -108,7 +121,9 @@ class LabManagementLib:
             print("Invalid amount:", e)
             return
 
+        # include lab_test_id now
         lb = LabBill(
+            lab_test_id=lab_test_id,
             patient_id=patient_id,
             total_amount=total,
             status="Paid",
@@ -116,7 +131,6 @@ class LabManagementLib:
 
         lb_id = LabManagementLib.dao.generate_lab_bill(lb)
         if lb_id:
-            # fetch patient name
             patient = LabManagementLib.reception_dao.search_patient_by_id(patient_id)
             pname = patient.get_name() if patient else "Unknown"
 
@@ -128,7 +142,6 @@ class LabManagementLib:
             print(f"Status      : Paid")
         else:
             print("Failed to generate laboratory bill.")
-
 
     # --------------------------------------------------------
     # LIST LAB BILLS
