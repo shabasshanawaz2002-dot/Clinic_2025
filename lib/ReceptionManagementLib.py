@@ -92,7 +92,6 @@ class ReceptionManagementLib:
                 doctor_id = input("Enter doctor ID: ")
                 today = datetime.today().date()
 
-                # get doctor details to check working hours
                 doctor = ReceptionManagementLib.dao.get_doctor_by_id(doctor_id)
                 if not doctor:
                     print("Doctor not found.")
@@ -101,7 +100,6 @@ class ReceptionManagementLib:
                 working_hours = doctor["working_hours"]   
                 time_input = input("Enter appointment time (HH:MM): ")
 
-                # validate doctor time
                 valid_time = validate_doctor_time(working_hours, time_input)
                 appointment = Appointment(
                     patient_id=patient_id,
@@ -138,10 +136,40 @@ class ReceptionManagementLib:
     @staticmethod
     def cancel_appointment():
         appt_id = input("Enter appointment ID: ")
+
+        # fetch appointment
+        appt = ReceptionManagementLib.dao.get_appointment_by_id(appt_id)
+        if not appt:
+            print("Invalid appointment ID")
+            return
+
+        # allow cancellation only for today's appointments
+        from datetime import datetime
+        appt_date = appt["appointment_date"]
+        today = datetime.today().date()
+        if appt_date != today:
+            print("\nYou can cancel only today's appointments.")
+            print(f"This appointment was on {appt_date}.")
+            return
+
+        # block if already cancelled
+        if appt["status"] == "Cancelled":
+            print("\nThis appointment is already cancelled.")
+            return
+
+        # only allow cancellation for Confirmed or Completed
+        valid_statuses = ["Confirmed", "Completed"]
+        if appt["status"] not in valid_statuses:
+            print("\nOnly Confirmed or Completed appointments can be cancelled.")
+            print(f"Current status: {appt['status']}")
+            return
+
+        # now actually cancel
         if ReceptionManagementLib.dao.cancel_appointment(appt_id):
             print("Appointment cancelled.")
         else:
             print("Operation failed.")
+
 
     # BILLING
     @staticmethod
@@ -152,6 +180,30 @@ class ReceptionManagementLib:
         appt = ReceptionManagementLib.dao.get_appointment_by_id(appt_id)
         if not appt:
             print("Invalid appointment ID")
+            return
+
+        # ✔ allow only Confirmed / Completed
+        valid_statuses = ["Confirmed", "Completed"]
+        if appt["status"] not in valid_statuses:
+            print("\nBilling is allowed only for Confirmed or Completed appointments.")
+            print(f"Current status: {appt['status']}")
+            return
+
+        # ✔ block past appointments
+        appt_date = appt["appointment_date"]
+        today = datetime.today().date()
+        if appt_date != today:
+            print("\nBilling is allowed only for today's appointments.")
+            print(f"This appointment was on {appt_date}.")
+            return
+
+        # ✔ block duplicate bill today
+        existing_bill = ReceptionManagementLib.dao.get_today_bill_by_appointment(appt_id)
+        if existing_bill:
+            print("\nA bill has already been generated for this appointment today.")
+            print(f"Bill ID: {existing_bill['bill_id']}")
+            print(f"Amount: {existing_bill['amount']}")
+            print(f"Date  : {existing_bill['generated_date']}")
             return
 
         patient_id = appt["patient_id"]
