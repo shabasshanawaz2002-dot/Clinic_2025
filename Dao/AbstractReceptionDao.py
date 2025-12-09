@@ -47,3 +47,11 @@ class ReceptionDaoService(ABC):
     @abstractmethod
     def list_consultation_bills(self) -> List[Bill]:
         pass
+
+    @abstractmethod
+    def get_appointment_by_id(self, appointment_id: str):
+        pass
+
+    @abstractmethod
+    def get_today_bill_by_appointment(self, appointment_id: str):
+        pass 
