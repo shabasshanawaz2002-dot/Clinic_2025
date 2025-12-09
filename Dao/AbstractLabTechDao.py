@@ -32,3 +32,9 @@ class LabTechDaoService(ABC):
     @abstractmethod
     def list_lab_bills(self) -> List[LabBill]:
         pass
+
+    # NEW
+    @abstractmethod
+    def get_bill_by_lab_test_id(self, lab_test_id: str):
+        """Return existing bill for a lab test if any"""
+        pass
