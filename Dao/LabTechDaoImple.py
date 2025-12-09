@@ -151,10 +151,11 @@ class LabTechDaoImplementation(LabTechDaoService):
             cursor.execute(
                 """
                 INSERT INTO lab_bill
-                (patient_id, total_amount, status, generated_date)
-                VALUES (%s,%s,%s,%s)
+                (lab_test_id, patient_id, total_amount, status, generated_date)
+                VALUES (%s,%s,%s,%s,%s)
                 """,
                 (
+                    lab_bill.get_lab_test_id(),
                     lab_bill.get_patient_id(),
                     lab_bill.get_total_amount(),
                     lab_bill.get_status(),
@@ -167,10 +168,10 @@ class LabTechDaoImplementation(LabTechDaoService):
             cur2.execute(
                 """
                 SELECT lab_bill_id FROM lab_bill
-                WHERE patient_id=%s
+                WHERE lab_test_id=%s
                 ORDER BY lab_bill_id DESC LIMIT 1
                 """,
-                (lab_bill.get_patient_id(),)
+                (lab_bill.get_lab_test_id(),)
             )
             row = cur2.fetchone()
             cur2.close()
@@ -198,10 +199,11 @@ class LabTechDaoImplementation(LabTechDaoService):
                 result.append(
                     LabBill(
                         lab_bill_id=row["lab_bill_id"],
+                        lab_test_id=row["lab_test_id"],     
                         patient_id=row["patient_id"],
                         total_amount=row["total_amount"],
                         status=row["status"],
-                        generated_date=row["generated_date"], # python datetime returned
+                        generated_date=row["generated_date"],
                     )
                 )
         except Exception as e:
@@ -227,3 +229,25 @@ class LabTechDaoImplementation(LabTechDaoService):
             return None
         finally:
             if cursor: cursor.close()
+
+    def get_bill_by_lab_test_id(self, lab_test_id: str):
+        cursor = None
+        try:
+            cursor = self.conn.cursor(DictCursor)
+            cursor.execute(
+                """
+                SELECT *
+                FROM lab_bill
+                WHERE lab_test_id = %s
+                LIMIT 1
+                """,
+                (lab_test_id,)
+            )
+            return cursor.fetchone()
+        except Exception as e:
+            print("get_today_lab_bill error:", e)
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+
